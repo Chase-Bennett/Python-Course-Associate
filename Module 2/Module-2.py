@@ -59,7 +59,7 @@ print("aAbByYzZaA".index("A"))
 
 # Demonstrating the list() function:
 print(list("abcabc"))
-
+'''
 '''
 # Demonstrating the count() method:
 print("abcabc".count("b"))
@@ -79,35 +79,42 @@ print( "abgd" . capitalize  ())
 print("αΒΓδ".capitalize())
 
 def mysplit(strng):
-# return [] if string is empty or contains whitespaces only
-    
+    # return [] if string is empty or contains whitespaces only
+    if strng == '' or strng.isspace():
+        return [ ]
     # prepare a list to return
-
+    lst = []
     # prepare a word to build subsequent words
-
+    word = ''
     # check if we are currently inside a word (i.e., if the string starts with a word)
-
+    inword = not strng[0].isspace()
     # iterate through all the characters in the string
-
+    for x in strng:
         # if we are currently inside a string...
-
+        if inword:
             # ... and the current character is not a space...
-
+            if not x.isspace():
                 # ... update the current word
-
+                word = word + x
+            else:
                 # ... otherwise, we've reached the end of the word so we need to append it to the list...
-
+                lst.append(word)
                 # ... and signal the fact that we are outside the word now
-
+                inword = False
+        else:
             # if we are outside the word and we've reached a non-white character...
-
+            if not x.isspace():
                 # ... it means that a new word has begun so we need to remember it and...
-
+                inword = True
                 # ... store the first letter of the new word
-
+                word = x
+            else:
+                pass
     # if we've left the string and there is a non-empty string in the word, we need to update the list
-
+    if inword:
+        lst.append(word)
     # return the list to the invoker
+    return lst
 
 
 print(mysplit("To be or not to be, that is the question"))
@@ -115,4 +122,56 @@ print(mysplit("To be or not to be,that is the question"))
 print(mysplit("   "))
 print(mysplit(" abc "))
 print(mysplit(""))
-print("Hello world")
+
+s1 = 'Where are the snows of yesteryear?'
+s2 = s1.split()
+s3 = sorted(s2)
+
+print(s3)'
+'''
+
+
+digits = [ '1111110',  	# 0
+	   '0110000',	# 1
+	   '1101101',	# 2
+	   '1111001',	# 3
+	   '0110011',	# 4
+	   '1011011',	# 5
+	   '1011111',	# 6
+	   '1110000',	# 7
+	   '1111111',	# 8
+	   '1111011',	# 9
+	   ]
+
+
+def print_number(num):
+	global digits
+	digs = str(num)
+	lines = [ '' for lin in range(5) ]
+	for d in digs:
+		segs = [ [' ',' ',' '] for lin in range(5) ]
+		ptrn = digits[ord(d) - ord('0')]
+		if ptrn[0] == '1':
+			segs[0][0] = segs[0][1] = segs[0][2] = '#'
+		if ptrn[1] == '1':
+			segs[0][2] = segs[1][2] = segs[2][2] = '#'
+		if ptrn[2] == '1':
+			segs[2][2] = segs[3][2] = segs[4][2] = '#'
+		if ptrn[3] == '1':
+			segs[4][0] = segs[4][1] = segs[4][2] = '#'
+		if ptrn[4] == '1':
+			segs[2][0] = segs[3][0] = segs[4][0] = '#'
+		if ptrn[5] == '1':
+			segs[0][0] = segs[1][0] = segs[2][0] = '#'
+		if ptrn[6] == '1':
+			segs[2][0] = segs[2][1] = segs[2][2] = '#'
+		for lin in range(5):
+			lines[lin] += ''.join(segs[lin]) + ' '
+	for lin in lines:
+		print(lin)
+
+
+
+
+print_number(int(input("Enter the number you wish to display: ")))
+    
