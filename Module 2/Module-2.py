@@ -176,6 +176,8 @@ def print_number(num):
 print_number(int(input("Enter the number you wish to display: ")))
 
 '''
+# Demonstrating the Caesar cipher encryption algorithm.
+'''
 # Input the text you want to encrypt.
 text = input("Enter message: ")
 
@@ -214,11 +216,164 @@ for char in text:
         cipher += char
 
 print(cipher)
+  '''  
     
+
+'''
+
+
+
+# Demonstrating the palindrome test.
+text = input("Enter text: ")
+
+# Remove all spaces...
+text = text.replace(' ','')
+
+# ... and check if the word is equal to reversed itself
+if len(text) > 1 and text.upper() == text[::-1].upper():
+	print("It's a palindrome")
+else:
+	print("It's not a palindrome")
+	
+
+'''
+'''
+
+# Demonstrating the anagram test.
+str_1 = input("Enter the first string: ")
+str_2 = input("Enter the second string: ")
+
+# This is what we're going to do with both strings:
+# - remove spaces
+str_1 = str_1.replace(' ','')
+str_2 = str_2.replace(' ','')
+# - change all letters to upper case
+str_1 = str_1.upper()
+str_2 = str_2.upper()
+# - convert into list
+str_1 = list(str_1)
+str_2 = list(str_2)
+# - sort the list
+str_1.sort()
+str_2.sort()
+# - join list's elements into string
+str_1 = 'b'.join(str_1)
+str_2 = 'b'.join(str_2)
+# and finally, compare both strings.
+if str_1 == str_2:
+    print("The two strings are anagrams")
+
+else:
+    print("The two strings are not anagrams")
+# Let's do it!
+
+
+
+
+date = input("Enter your birthday date (in the following format: YYYYMMDD or YYYYDDMM, 8 digits): ")
+
+# Write the if-else branch here.
+if len(date) != 8 or not date.isdigit():
+    print("Invalid date format!")
+
+    # While there is more than one digit in the date...
+else:
+    while len(date) > 1:    
+        # ... split the string into its digits...
+        digits = [int(d) for d in date]
+
+
+        # ... calculate the sum of all the digits...
+        total = sum(digits)
+
+        # ... and store it inside the string.
+        date = str(total)
+    # Print the result.
+
+print("Your Digit of Life is: " + date)
+
+
+word = input("Enter the word you wish to find: ").upper()
+strn = input("Enter the string you wish to search through: ").upper()
+
+found = True
+start = 0
+
+for ch in word:
+	pos = strn.find(ch, start) 
+	if pos < 0:
+		found = False
+		break
+	start = pos + 1
+if found:
+	print("Yes")
+else:
+	print("No")
+
+'''
+
+# A function that checks whether a list passed as an argument contains
+# nine digits from '1' to '9'.
+def checkset(digs):
+    return sorted(list(digs)) == [chr(x + ord('0')) for x in range(1, 10)]
+
+
+# A list of rows representing the sudoku.
+rows = [ ]
+for r in range(9):
+    # Initialize the variable inside the loop
+    ok = True
     
+# Check if all rows are good.
+for r in range(9):
+    # Read a row from the user.
+    row = input("Enter row " + str(r + 1) + ": ")
+    
+    # Check if the row is valid.
+    if len(row) != 9 or not row.isdigit():
+        print("Invalid row!")
+        ok = False
+        break
+    
+    # Check if the row contains all digits from '1' to '9'.
+    if not checkset(row):
+        print("Invalid row!")
+        ok = False
+        break
+    
+    # Append the row to the list of rows.
+    rows.append(row)
 
+# Check if all columns are good.
+if ok:
+    for c in range(9):
+        # Extract the column from the rows.
+        col = ''.join(rows[r][c] for r in range(9))
+        
+        # Check if the column contains all digits from '1' to '9'.
+        if not checkset(col):
+            print("Invalid column!")
+            ok = False
+            break
 
+# Check if all sub-squares (3x3) are good.
+if ok:
+    for r in range(0, 9, 3):
+        for c in range(0, 9, 3):
+            # Extract the 3x3 sub-square.
+            sub_square = ''.join(rows[r][c:c+3] + rows[r+1][c:c+3] + rows[r+2][c:c+3])
+            
+            # Check if the sub-square contains all digits from '1' to '9'.
+            if not checkset(sub_square):
+                print("Invalid sub-square!")
+                ok = False
+                break
+        if not ok:
+            break
 
-
-
-
+# Print the final verdict.
+if ok:
+    print("Yes")
+else:
+    print("No")
+    
