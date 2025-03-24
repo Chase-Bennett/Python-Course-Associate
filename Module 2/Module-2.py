@@ -310,7 +310,7 @@ if found:
 else:
 	print("No")
 
-'''
+
 
 # A function that checks whether a list passed as an argument contains
 # nine digits from '1' to '9'.
@@ -321,38 +321,29 @@ def checkset(digs):
 # A list of rows representing the sudoku.
 rows = [ ]
 for r in range(9):
-    # Initialize the variable inside the loop
-    ok = True
-    
-# Check if all rows are good.
-for r in range(9):
-    # Read a row from the user.
-    row = input("Enter row " + str(r + 1) + ": ")
-    
-    # Check if the row is valid.
-    if len(row) != 9 or not row.isdigit():
-        print("Invalid row!")
-        ok = False
-        break
-    
-    # Check if the row contains all digits from '1' to '9'.
-    if not checkset(row):
-        print("Invalid row!")
-        ok = False
-        break
-    
-    # Append the row to the list of rows.
+    ok = False
+    while not ok:
+        row = input("Enter row #" + str(r + 1) + ": ")
+        ok = len(row) == 9 or row.isdigit()
+        if not ok:
+            print("Incorrect row data - 9 digits required")
     rows.append(row)
 
-# Check if all columns are good.
+ok = True
+
+# Check if all rows are good.
+for r in range(9):
+    if not checkset(rows[r]):
+        ok = False
+        break
+
+# Check if all columns are good.	
 if ok:
     for c in range(9):
-        # Extract the column from the rows.
-        col = ''.join(rows[r][c] for r in range(9))
-        
-        # Check if the column contains all digits from '1' to '9'.
+        col = []
+        for r in range(9):
+            col.append(rows[r][c])
         if not checkset(col):
-            print("Invalid column!")
             ok = False
             break
 
@@ -360,16 +351,13 @@ if ok:
 if ok:
     for r in range(0, 9, 3):
         for c in range(0, 9, 3):
-            # Extract the 3x3 sub-square.
-            sub_square = ''.join(rows[r][c:c+3] + rows[r+1][c:c+3] + rows[r+2][c:c+3])
-            
-            # Check if the sub-square contains all digits from '1' to '9'.
-            if not checkset(sub_square):
-                print("Invalid sub-square!")
+            sqr = ''
+            # Make a string containing all digits from a sub-square.
+            for i in range(3):
+                sqr += rows[r+i][c:c+3]
+            if not checkset(list(sqr)):
                 ok = False
                 break
-        if not ok:
-            break
 
 # Print the final verdict.
 if ok:
@@ -377,3 +365,27 @@ if ok:
 else:
     print("No")
     
+
+
+
+try:
+    y = 1 / 0
+except ZeroDivisionError:
+    print("Ooopsss...")
+
+print("THE END.")
+try:
+    y = 1 / 0
+except ArithmeticError:
+    print("Oooppsss...")
+ 
+print("THE END.")
+'''
+try:
+    y = 1 / 0
+except ArithmeticError:
+    print("Arithmetic problem!")
+except ZeroDivisionError:
+    print("Zero Division!")
+ 
+print("THE END.")
