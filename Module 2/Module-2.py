@@ -380,7 +380,7 @@ except ArithmeticError:
     print("Oooppsss...")
  
 print("THE END.")
-'''
+
 try:
     y = 1 / 0
 except ArithmeticError:
@@ -389,3 +389,58 @@ except ZeroDivisionError:
     print("Zero Division!")
  
 print("THE END.")
+
+
+def read_int(prompt, min, max):
+    #
+    try:
+        v=int(input(prompt))
+        if v<min or v>max:
+            print("Error: the value is not within permitted range (",min,"--",max,")")
+        else:
+            return v
+
+    except:
+        print("Error: wrong input")
+        return None
+
+    # Write your code here.
+    #
+
+
+
+
+v = read_int("Enter a number from min to max,", int(input("min value please ")), int(input("max value please ")))
+if v is not None:   
+    print("The number is:", v)
+
+
+
+
+
+
+
+
+def read_int(prompt, min, max):
+    ok = False
+    while not ok:
+        try:
+            value = int(input(prompt))
+            ok = True
+        except ValueError:
+            print("Error: wrong input")
+        if ok:
+            ok = value >= min and value <= max
+        if not ok:
+            print("Error: the value is not within permitted range (" + str(min) + ".." + str(max) + ")")
+    return value
+
+
+v = read_int("Enter a number from -10 to 10: ", -10, 10)
+
+print("The number is:", v)
+
+
+
+'''
+
