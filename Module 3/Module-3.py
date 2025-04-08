@@ -194,9 +194,6 @@ for i in range(100):
     stk.pop()
 print(stk.get_counter())
 
-'''
-
-
 class QueueError(IndexError):
     pass
 
@@ -204,10 +201,8 @@ class QueueError(IndexError):
 class Queue:
     def __init__(self):
         self.queue = []
-
-    def put(self, elem):
-        self.queue.insert(0, elem)
-
+    def put(self,elem):
+        self.queue.insert(0,elem)
     def get(self):
         if len(self.queue) > 0:
             elem = self.queue[-1]
@@ -217,13 +212,84 @@ class Queue:
             raise QueueError
 
 
-que = Queue()
+class SuperQueue(Queue):
+    def isempty(self):
+        return len(self.queue) == 0
+
+
+que = SuperQueue()
 que.put(1)
 que.put("dog")
 que.put(False)
-try:
-    for i in range(4):
+for i in range(4):
+    if not que.isempty():
         print(que.get())
-except:
-    print("Queue error")
-    
+    else:
+        print("Queue empty")
+
+class ExampleClass:
+    counter = 0
+    def __init__(self, val = 1):
+        self.__first = val
+        ExampleClass.counter += 1
+ 
+ 
+example_object_1 = ExampleClass()
+example_object_2 = ExampleClass(2)
+example_object_3 = ExampleClass(4)
+example_object_3 = ExampleClass(4)
+example_object_3 = ExampleClass(4)
+example_object_3 = ExampleClass(4)
+example_object_3 = ExampleClass(4)      
+example_object_3 = ExampleClass(4)
+example_object_3 = ExampleClass(4)
+example_object_3 = ExampleClass(4)
+
+print(example_object_1.__dict__, example_object_1.counter)
+print(example_object_2.__dict__, example_object_2.counter)
+print(example_object_3.__dict__, example_object_3.counter)
+
+
+class ExampleClass:
+    varia = 1
+    def __init__(self, val):
+        ExampleClass.varia = val
+
+
+print(ExampleClass.__dict__)
+example_object = ExampleClass(2)
+
+print(ExampleClass.__dict__)
+print(example_object.__dict__)
+
+class ExampleClass:
+    def __init__(self, val):
+        if val % 2 != 0:
+            self.a = 1
+        else:
+            self.b = 1
+
+
+example_object = ExampleClass(1)
+print(example_object.a)
+
+try:
+    print(example_object.b)
+except AttributeError:
+    pass
+
+'''
+
+class ExampleClass:
+    a = 1
+    def __init__(self):
+        self.b = 2
+ 
+ 
+example_object = ExampleClass()
+ 
+print(hasattr(example_object, 'b'))
+print(hasattr(example_object, 'a'))
+print(hasattr(ExampleClass, 'b'))
+print(hasattr(ExampleClass, 'a'))
+ 
