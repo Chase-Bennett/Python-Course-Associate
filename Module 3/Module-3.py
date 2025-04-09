@@ -278,7 +278,7 @@ try:
 except AttributeError:
     pass
 
-'''
+
 
 class ExampleClass:
     a = 1
@@ -292,4 +292,37 @@ print(hasattr(example_object, 'b'))
 print(hasattr(example_object, 'a'))
 print(hasattr(ExampleClass, 'b'))
 print(hasattr(ExampleClass, 'a'))
+
+class Classy:
+    def other(self):
+        print("other")
+    
+    def method(self):
+         self.other()
+         print("method")
+         self.other()
+       
+        
  
+ 
+obj = Classy()
+obj.method()
+
+
+class Classy:
+    def __init__(self, value = None):
+        self.var = value
+
+
+obj_1 = Classy("object")
+obj_2 = Classy()
+
+print(obj_1.var)
+print(obj_2.var) '''
+class Classy:
+    pass
+
+
+print(Classy.__name__)
+obj = Classy()
+print(obj.__module__)
