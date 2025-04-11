@@ -385,7 +385,7 @@ print(timer)
 timer.prev_second()
 print(timer)
     
-'''
+
 
 class WeekDayError(Exception):
     pass
@@ -420,3 +420,97 @@ try:
 except WeekDayError:
     print("Sorry, I can't serve your request.")
     
+
+import math
+
+class Point:
+    def __init__(self, x=0.0, y=0.0):
+        # store coordinates as floats
+        self._x = float(x)
+        self._y = float(y)
+
+    def getx(self):
+        return self._x
+
+    def gety(self):
+        return self._y
+
+    def distance_from_xy(self, x, y):
+        # compute distance to arbitrary (x, y)
+        dx = self._x - x
+        dy = self._y - y
+        return math.sqrt(dx*dx + dy*dy)
+
+    def distance_from_point(self, point):
+        # reuse distance_from_xy for another Point instance
+        return self.distance_from_xy(point.getx(), point.gety())
+
+
+# demonstration
+if __name__ == "__main__":
+    point1 = Point(0, 0)
+    point2 = Point(1, -200)
+    print(point1.distance_from_point(point2))  # → 1.4142135623730951
+    print(point2.distance_from_xy(2, 90))       # → 1.4142135623730951
+    '''
+
+
+
+
+
+import math
+
+
+class Point:
+    def __init__(self, x=0.0, y=0.0):
+        # store coordinates as floats
+        self._x = float(x)
+        self._y = float(y)
+
+    def getx(self):
+        return self._x
+
+    def gety(self):
+        return self._y
+
+    def distance_from_xy(self, x, y):
+        # compute distance to arbitrary (x, y)
+        dx = self._x - x
+        dy = self._y - y
+        return math.sqrt(dx*dx + dy*dy)
+
+    def distance_from_point(self, point):
+        # reuse distance_from_xy for another Point instance
+        return self.distance_from_xy(point.getx(), point.gety())
+    #
+    # The code copied from the previous lab.
+    #
+
+
+class Triangle:
+    def __init__(self, vertice1, vertice2, vertice3):
+        #
+        self.vertice1 = vertice1
+        self.vertice2 = vertice2    
+        self.vertice3 = vertice3
+        # Write code here
+        #
+
+    def perimeter(self):
+        d1=self.vertice1.distance_from_point( self.vertice2)
+        d2=self.vertice2.distance_from_point( self.vertice3)
+        d3=self.vertice3.distance_from_point( self.vertice1)
+        return d1+d2+d3
+
+
+        #
+        # Write code here
+        #
+
+
+triangle = Triangle(Point(0, 0), Point(1, 0), Point(454450, 1))
+print(triangle.perimeter())
+    
+
+point1 = Point(0, 0)
+point2 = Point(1, 2)
