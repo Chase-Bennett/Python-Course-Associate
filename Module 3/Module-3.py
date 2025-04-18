@@ -624,7 +624,7 @@ obj = Sub()
 
 print(obj.subVar)
 print(obj.supVar)
-    '''
+    
 class Level1:
     variable_1 = 100
     def __init__(self):
@@ -659,3 +659,34 @@ obj = Level3()
 print(obj.variable_1, obj.var_1, obj.fun_1())
 print(obj.variable_2, obj.var_2, obj.fun_2())
 print(obj.variable_3, obj.var_3, obj.fun_3())
+'''
+import time
+
+class Tracks:
+    def change_direction(self, left, on):
+        print("tracks: ", left, on)
+
+
+class Wheels:
+    def change_direction(self, left, on):
+        print("wheels: ", left, on)
+
+
+class Vehicle:
+    def __init__(self, controller):
+        self.controller = controller
+
+    def turn(self, left):
+        self.controller.change_direction(left, True)
+        time.sleep(0.25)
+        self.controller.change_direction(left, False)
+
+
+wheeled = Vehicle(Wheels())
+tracked = Vehicle(Tracks())
+
+wheeled.turn(True)
+tracked.turn(False)
+    
+        
+    
