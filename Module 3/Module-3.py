@@ -659,7 +659,6 @@ obj = Level3()
 print(obj.variable_1, obj.var_1, obj.fun_1())
 print(obj.variable_2, obj.var_2, obj.fun_2())
 print(obj.variable_3, obj.var_3, obj.fun_3())
-'''
 import time
 
 class Tracks:
@@ -690,3 +689,61 @@ tracked.turn(False)
     
         
     
+
+def print_exception_tree(thisclass, nest = 0):
+    if nest > 1:
+        print("   |" * (nest - 1), end="")
+    if nest > 0:
+        print("   +---", end="")
+
+    print(thisclass.__name__)
+
+    for subclass in thisclass.__subclasses__():
+        print_exception_tree(subclass, nest + 1)
+
+
+print_exception_tree(BaseException)
+'
+def print_args(args):
+    lng = len(args)
+    if lng == 0:
+        print("")
+    elif lng == 1:
+        print(args[0])
+    else:
+        print(str(args))
+
+
+try:
+    raise Exception
+except Exception as e:
+    print(e, e.__str__(), sep=' : ' ,end=' : ')
+    print_args(e.args)
+
+try:
+    raise Exception("my exception")
+except Exception as e:
+    print(e, e.__str__(), sep=' : ', end=' : ')
+    print_args(e.args)
+
+try:
+    raise Exception("my", "exception")
+except Exception as e:
+    print(e, e.__str__(), sep=' : ', end=' : ')
+    print_args(e.args)
+	
+    
+'''
+
+class Ex(Exception):
+    def __init__(self, msg):
+        Exception.__init__(self, msg + msg)
+        self.args = (msg,)
+ 
+ 
+try:
+    raise Ex('ex')
+except Ex as e:
+    print(e)
+except Exception as e:
+    print(e)
