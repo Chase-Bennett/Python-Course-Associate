@@ -122,7 +122,7 @@ print()
 for v in (1 if x % 2 == 0 else 0 for x in range(10)):
     print(v, end=" ")
 print()
-'''
+
 two = lambda: 2
 sqr = lambda x: x * x
 pwr = lambda x, y: x ** y
@@ -130,3 +130,58 @@ pwr = lambda x, y: x ** y
 for a in range(-2, 30):
     print(sqr(a), end=" ")
     print(pwr(a, two()))
+    
+def print_function(args, fun):
+    for x in args:
+        print('f(', x,')=', fun(x), sep='')
+
+
+def poly(x):
+    return 2 * x**2 - 4 * x + 2
+
+
+print_function([x for x in range(-20, 30)], poly)
+
+
+
+list_1 = [x for x in range(30)]
+list_2 = list(map(lambda x: 2 ** x, list_1))
+print(list_2)
+
+for x in map(lambda x: (x * x)/(4.34*x), list_2):
+    print(x, end=' ')
+print()
+from random import seed, randint
+
+seed()
+data = [randint(-100,100) for x in range(50)]
+filtered = list(filter(lambda x: x > 0 and x % 4 == 0, data))
+
+print(data)
+print(filtered)
+
+def outer(par):
+    loc = par
+ 
+ 
+var = 1
+outer(var)
+ 
+#print(par)
+#print(loc)
+'''
+
+def make_closure(par):
+    
+    loc = par
+
+    def power(p):
+        return p ** par
+    return power
+
+
+fsqr = make_closure(2)
+fcub = make_closure(3)
+
+for i in range(5):
+    print(i, fsqr(i), fcub(i))
