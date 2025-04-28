@@ -169,14 +169,14 @@ outer(var)
  
 #print(par)
 #print(loc)
-'''
+
 
 def make_closure(par):
     
     loc = par
 
     def power(p):
-        return p ** par
+        return p ** loc
     return power
 
 
@@ -185,3 +185,84 @@ fcub = make_closure(3)
 
 for i in range(5):
     print(i, fsqr(i), fcub(i))
+
+'''
+
+
+'''
+from os import strerror
+
+
+try:
+    character_counter = line_counter = 0
+
+    #with open(file_path, 'rt', encoding='utf-8') as stream:
+      for line in stream:
+           line_counter += 1
+            for char in line:
+                print(char, end='')
+                character_counter += 1
+
+    print(f"\n\nCharacters in file: {character_counter}")
+    print(f"Lines in file:      {line_counter}")
+
+except IOError as e:
+    print("I/O error occurred:", strerror(e.errno))
+    
+
+
+
+
+from os import strerror
+
+try:
+    ccnt = lcnt = 0
+   # s = open(r"C:/Users/02CHASE.BENNETT/Chase Bennett/Python Cert/Python-Course-Associate/Python-Course-Associate/Module 4/text.txt", 'rt')
+    lines = s.readlines(20)
+    while len(lines) != 0:
+        for line in lines:
+            lcnt += 1
+            for ch in line:
+                print(ch, end='')
+                ccnt += 1
+        lines = s.readlines(10)
+    s.close()
+    print("\n\nCharacters in file:", ccnt)
+    print("Lines in file:     ", lcnt)
+except IOError as e:
+    print("I/O error occurred:", strerror(e.errno))
+    
+from os import strerror
+
+try:
+	file = open('newtextungabunga.txt', 'wt') # A new file (newtext.txt) is created.
+	for i in range(10):
+		s = "line #" + str(i+1) + "\n"
+		for char in s:
+			file.write(char)
+	file.close()
+except IOError as e:
+	print("I/O error occurred: ", strerror(e.errno))
+    
+
+
+from os import strerror
+
+try:
+    file = open('newtext.txt', 'wt')
+    for i in range(10000):
+        file.write("line #" + str(i+1)+"#what's up\n")
+    file.close()
+except IOError as e:
+    print("I/O error occurred: ", strerror(e.errno))
+
+
+'''
+
+data = bytearray(100)
+
+for i in range(len(data)):
+    data[i] = 100 - i
+
+for b in data:
+    print(hex(b))
