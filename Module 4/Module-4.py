@@ -257,7 +257,6 @@ except IOError as e:
     print("I/O error occurred: ", strerror(e.errno))
 
 
-'''
 
 data = bytearray(100)
 
@@ -266,3 +265,272 @@ for i in range(len(data)):
 
 for b in data:
     print(hex(b))
+
+
+from os import strerror
+
+data = bytearray(10)
+
+for i in range(len(data)):
+    data[i] = 10 + i
+
+try:
+    bf = open('file.bin', 'wb')
+    bf.write(data)
+    bf.close()
+except IOError as e:
+    print("I/O error occurred:", strerror(e.errno))
+
+
+
+from os import strerror
+
+data = bytearray(10)
+
+try:
+    binary_file = open('file.bin', 'rb')
+    binary_file.readinto(data)
+    binary_file.close()
+
+    for b in data:
+        print(hex(b), end=' ')
+except IOError as e:
+    print("I/O error occurred:", strerror(e.errno))
+
+
+
+
+
+try:
+    binary_file = open('file.bin', 'rb')
+    data = bytearray(binary_file.read(5))
+    binary_file.close()
+
+    for b in data:
+        print(hex(b), end=' ')
+
+except IOError as e:
+    print("I/O error occurred:", strerror(e.errno))
+  
+
+from os import strerror
+
+srcname = input("Enter the source file name: ")
+try:
+    src = open(srcname, 'rb')
+except IOError as e:
+    print("Cannot open the source file: ", strerror(e.errno))
+    exit(e.errno)	
+
+dstname = input("Enter the destination file name: ")
+try:
+    dst = open(dstname, 'wb')
+except Exception as e:
+    print("Cannot create the destination file: ", strerror(e.errno))
+    src.close()
+    exit(e.errno)	
+
+buffer = bytearray(65536)
+total  = 0
+try:
+    readin = src.readinto(buffer)
+    while readin > 0:
+        written = dst.write(buffer[:readin])
+        total += written
+        readin = src.readinto(buffer)
+except IOError as e:
+    print("Cannot create the destination file: ", strerror(e.errno))
+    exit(e.errno)	
+    
+print(total,'byte(s) succesfully written')
+src.close()
+dst.close()
+      
+
+
+
+from os import strerror
+
+
+
+
+try:
+    test= open("lab1.txt", 'rb')
+except IOError as e:
+    print("Cannot open the source file: ", strerror(e.errno))
+    exit(e.errno)
+
+
+
+
+import sys
+from os import strerror
+from collections import Counter
+
+# 1) Read file
+try:
+    with open("lab1.txt", "r", encoding="utf-8") as f:
+        text = f.read()
+except OSError as e:
+    print("Cannot open file:", strerror(e.errno), file=sys.stderr)
+    sys.exit(e.errno)
+    
+# Initialize empty dict to hold counts
+counts = counts = Counter(ch.lower() for ch in text if ch.isalpha())
+
+
+
+dict_array = [
+    {"letter": letter, "count": counts[letter]}
+    for letter in sorted(counts)]
+
+
+# Suppose `text` is the string you want to analyze:
+
+text = test.read()
+for ch in text:
+    if ch != "":               # only count letters
+        key = ch        # normalize to lowercase
+        counts[key] = counts.get(key, 0) + 1
+
+print(counts)
+
+
+from os import strerror
+
+# Initialize 26 counters for each Latin letter.
+# Note: we've used a comprehension to do that.
+counters = {chr(ch): 0 for ch in range(ord('a'), ord('z') + 1)}
+#file_name = input("Enter the name of the file to analyze: ")
+try:
+    file = open("lab1.txt", "rt")
+    for line in file:
+        for char in line:
+            # If it is a letter...
+            if char.isalpha():
+                # ... we'll treat it as lower-case and update the appropriate counter.
+                counters[char.lower()] += 1
+    file.close()
+    # Let's output the counters.
+    for char in counters.keys():
+        c = counters[char]
+        if c > 0:
+            print(char, '->', c)
+except IOError as e:
+    print("I/O error occurred: ", strerror(e.errno))
+    
+
+# Open (or create) "lab1.hist" in write-text mode; ensure it’s closed automatically
+with open("lab1.hist", "wt") as file:
+    # Write the header line
+    file.write("Letter\tCount\n")
+
+    # Iterate over (letter, count) pairs sorted by count, descending
+    for char, count in sorted(
+        counters.items(),           # get (letter, count) pairs
+        key=lambda item: item[1],   # sort by count value
+        reverse=True                # highest counts first
+    ):
+        # Only write letters that appeared at least once
+        if count > 0:
+            # Write the letter and its count, separated by a tab
+            file.write(f"{char}\t{count}\n")
+
+
+
+from os import strerror
+
+counters = {chr(ch): 0 for ch in range(ord('a'), ord('z') + 1)}
+file_name = input("Enter the name of the file to analyze: ")
+try:
+    # explicit UTF-8 reading, ignore invalid bytes
+    file = open(file_name, "rt", encoding="utf-8", errors="ignore")
+    for line in file:
+        for char in line:
+            if char.isalpha():
+                counters[char.lower()] += 1
+    file.close()
+
+    # write out with explicit UTF-8 encoding
+    file = open(file_name + '.hist', 'wt', encoding="utf-8")
+    # Note: we've used a lambda to access the directory's elements and set reverse to get a valid order.
+    for char in sorted(counters.keys(), key=lambda x: counters[x], reverse=True):
+        c = counters[char]
+        if c > 0:
+            file.write(char + ' -> ' + str(c) + '\n')
+    file.close()
+except IOError as e:
+    print("I/O error occurred: ", strerror(e.errno))
+
+    
+'''
+
+class StudentsDataException(Exception):
+    """Base exception for student data errors."""
+    pass
+
+class BadLine(StudentsDataException):
+    """Raised when a line in the input file is malformed."""
+    def __init__(self, lineno: int, content: str):
+        self.lineno = lineno
+        self.content = content.rstrip('\n')
+        super().__init__(f"Line {lineno}: cannot parse '{self.content}'")
+
+class FileEmpty(StudentsDataException):
+    """Raised when the input file contains no data lines."""
+    def __init__(self, filename: str):
+        super().__init__(f"File '{filename}' is empty")
+
+def read_and_aggregate(filename: str):
+    students = {}  # key: (first, last), value: total points
+    with open(filename, 'r', encoding='utf-8', errors='replace') as f:
+        lines = f.readlines()
+
+    if not lines:
+        raise FileEmpty(filename)
+
+    any_data = False
+    for lineno, raw in enumerate(lines, start=1):
+        line = raw.strip()
+        if not line:
+            # treat blank lines as malformed
+            raise BadLine(lineno, raw)
+        parts = line.split()
+        if len(parts) != 3:
+            raise BadLine(lineno, raw)
+        first, last, score_str = parts
+        try:
+            score = float(score_str)
+        except ValueError:
+            raise BadLine(lineno, raw)
+
+        any_data = True
+        students[(first, last)] = students.get((first, last), 0.0) + score
+
+    if not any_data:
+        raise FileEmpty(filename)
+
+    return students
+
+def print_report(students):
+    # Sort by first name, then last name
+    for (first, last), total in sorted(students.items(), key=lambda x: (x[0][0], x[0][1])):
+        # Align columns with 8-character width for names
+        print(f"{first:<8} {last:<8} {total:.1f}")
+
+def main():
+    filename = input("Enter Prof. Jekyll's data file name: ").strip()
+    try:
+        students = read_and_aggregate(filename)
+    except StudentsDataException as e:
+        # Propagate with clear message; no sugar-coating.
+        print(f"Error: {e}")
+        return
+    except FileNotFoundError:
+        print(f"Error: file '{filename}' not found")
+        return
+
+    print_report(students)
+
+if __name__ == "__main__":
+    main()
