@@ -463,7 +463,7 @@ except IOError as e:
     print("I/O error occurred: ", strerror(e.errno))
 
     
-'''
+
 
 class StudentsDataException(Exception):
     """Base exception for student data errors."""
@@ -533,4 +533,107 @@ def main():
     print_report(students)
 
 if __name__ == "__main__":
+
     main()
+
+import platform
+import os
+os.mkdir("my_first_directory")
+print(os.listdir())
+
+
+import os
+
+os.makedirs("my_first_directory/my_second_directory/my_third_directory/my_fourth_directory/deep.txt")
+os.chdir("my_first_directory/my_second_directory/my_third_directory/my_fourth_directory/deep.txt")
+open("deep.txt", "w").close()
+print(os.listdir())
+    
+
+
+
+
+import os
+
+os.makedirs("my_first_directory/my_second_directory")
+os.chdir("my_first_directory")
+print(os.getcwd())
+os.chdir("my_second_directory")
+print(os.getcwd())
+    
+
+
+import os
+
+
+try:
+    os.makedirs("my_first_directory")
+except FileExistsError:
+    print("Directory already exists")
+
+finally:
+    print(os.listdir())
+
+
+os.rmdir("my_first_directory")
+print(os.listdir())
+import os
+ 
+os.makedirs("my_first_directory/my_second_directory")
+os.removedirs("my_first_directory/my_second_directory")
+print(os.listdir())
+
+
+
+import os
+
+returned_value = os.system("mkdir my_first_directory")
+print(returned_value)
+
+
+import os
+
+def find(path, dir_name):
+    path = os.path.abspath(path)
+
+    found = False
+    for root, dirs, files in os.walk(path):
+        if dir_name in dirs:
+            print(os.path.abspath(os.path.join(root, dir_name)))
+            found = True
+    if not found:
+        print("Directory not found")
+
+# Example usage
+path = "./tree"
+dir_name = "python"
+find(path, dir_name)
+'''
+
+
+
+
+import os
+
+class DirectorySearcher:
+    def find(self, path, dir):
+        try:
+            os.chdir(path)
+        except OSError:
+            # Doesn't process a file that isn't a directory.
+            return
+
+        current_dir = os.getcwd()
+        for entry in os.listdir("."):
+            if entry == dir:
+                print(os.getcwd() + "/" + dir)
+            self.find(current_dir + "/" + entry, dir)
+
+
+directory_searcher = DirectorySearcher()
+directory_searcher.find("./tree", "python")
+    
+
+
+
+
