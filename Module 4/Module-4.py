@@ -608,7 +608,7 @@ def find(path, dir_name):
 path = "./tree"
 dir_name = "python"
 find(path, dir_name)
-'''
+
 
 
 
@@ -632,8 +632,108 @@ class DirectorySearcher:
 
 directory_searcher = DirectorySearcher()
 directory_searcher.find("./tree", "python")
+from datetime import date
+
+today = date.today()
+
+print("Today:", today)
+print("Year:", today.year)
+print("Month:", today.month)
+print("Day:", today.day)
+
+
+
+from datetime import date
+
+today = date(202, 2, 9)
+print(today)
+    
+
+print("Today:", today)
+print("Year:", today.year)
+print("Month:", today.month)
+print("Day:", today.day)
+
+from datetime import date
+import time
+
+timestamp = time.time()
+print("Timestamp:", timestamp)
+
+d = date.fromtimestamp(timestamp)
+print("Date:", d)
+ 
+from datetime import date
+
+d = date(1991, 2, 5)
+print(d)
+
+d = d.replace(year=1992)
+print(d)
+ 
+from datetime import date
+ 
+d = date(2019, 11, 4)
+print(d.isoweekday())
+   
+
+
+
+from datetime import time
+
+t = time(14, 53, 20, 1)
+
+print("Time:", t)
+print("Hour:", t.hour)
+print("Minute:", t.minute)
+print("Second:", t.second)
+print("Microsecond:", t.microsecond)
+  
+
+import time
+import math 
+
+class Student:
+    def take_nap(self, seconds):
+        print("I'm very tired. I have to take a nap. See you later.")
+        time.sleep(seconds)
+        print("I slept well! I feel great!")
+
+student = Student()
+student.take_nap(math.sqrt(math.sqrt(math.pi * 20)))
+    
+
+import time
+
+timestamp = 5728891811
+print(time.ctime(timestamp))
+
+
+import time
+print(time.ctime(0))
+import time
+print(time.ctime(60*5*60))
+
+
+import time
+
+timestamp = 1572879180
+print(time.gmtime())
+print(time.localtime())
     
 
 
+import time
 
 
+st = time.gmtime()
+print(time.gmtime())
+print(time.asctime(st))
+print(time.mktime((st)))''' 
+
+
+from datetime import datetime
+
+print("today:", datetime.today())
+print("now:", datetime.now())
+print("utcnow:", datetime.utcnow())
