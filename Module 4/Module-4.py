@@ -729,7 +729,7 @@ import time
 st = time.gmtime()
 print(time.gmtime())
 print(time.asctime(st))
-print(time.mktime((st)))''' 
+print(time.mktime((st))) 
 
 
 from datetime import datetime
@@ -737,3 +737,24 @@ from datetime import datetime
 print("today:", datetime.today())
 print("now:", datetime.now())
 print("utcnow:", datetime.utcnow())
+
+
+from datetime import time
+from datetime import datetime
+
+t = time(14, 53)
+print(t.strftime("%H:%M:%S"))
+from datetime import time
+
+t = time(14, 30)
+print(t.strftime("%Y"))  # Output: 1900
+'''
+
+import time
+
+
+timestamp = 1572879180
+st = time.gmtime(timestamp)
+
+print(time.strftime("%Y/%m/%d %H:%M:%S", st))
+print(time.strftime("%Y/%m/%d %H:%M:%S"))
