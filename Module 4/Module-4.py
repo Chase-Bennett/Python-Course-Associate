@@ -748,7 +748,6 @@ from datetime import time
 
 t = time(14, 30)
 print(t.strftime("%Y"))  # Output: 1900
-'''
 
 import time
 
@@ -758,3 +757,60 @@ st = time.gmtime(timestamp)
 
 print(time.strftime("%Y/%m/%d %H:%M:%S", st))
 print(time.strftime("%Y/%m/%d %H:%M:%S"))
+
+
+import time
+print(time.strptime("2019/11/04 14:53:00", "%Y/%m/%d %H:%M:%S"))
+
+print("2019/11/04 14:53:00")
+
+
+from datetime import date
+from datetime import datetime
+
+d1 = date(2020, 11, 4)
+d2 = date(2019, 11, 4)
+
+print(d1 - d2)
+
+dt1 = datetime(2020, 11, 4, 0, 0, 0)
+dt2 = datetime(2019, 11, 4, 22, 59, 2)
+
+print(dt1 - dt2)
+from datetime import timedelta
+
+delta = timedelta(weeks=2, days=2, hours=3, minutes=5, seconds=10, milliseconds=100, microseconds=500)
+print(delta)
+
+from datetime import timedelta
+ 
+delta = timedelta(weeks=2, days=2, hours=3, milliseconds=100)
+print("Days:", delta.days)
+print("Seconds:", delta.seconds)
+print("Microseconds:", delta.microseconds)
+from datetime import timedelta
+from datetime import date
+from datetime import datetime
+
+delta = timedelta(weeks=2, days=2, hours=2)
+print(delta)
+
+delta2 = delta / 2*1000
+print(delta2)
+
+d = date(2019, 10, 4) + delta2
+print(d)
+
+dt = datetime(2019, 10, 4, 14, 53) + delta2
+print(dt)
+    '''
+import datetime
+
+# Create the datetime object
+dt = datetime.datetime(2017, 3, 22, 8, 17, 45)
+print(dt.strftime("%Y/ %m/ %d/ %H: %M: %S"))
+print(dt.strftime("%y/ %B/ %d/ %H: %M: %S %p"))
+print(dt.strftime("%a, %Y %b %d"))
+print(dt.strftime("Weekday: %u"))
+print(dt.strftime("day of the year: %j"))
+print(dt.strftime("Week of the year: %U"))
