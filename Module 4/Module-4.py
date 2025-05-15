@@ -803,7 +803,6 @@ print(d)
 
 dt = datetime(2019, 10, 4, 14, 53) + delta2
 print(dt)
-    '''
 import datetime
 
 # Create the datetime object
@@ -813,4 +812,47 @@ print(dt.strftime("%y/ %B/ %d/ %H: %M: %S %p"))
 print(dt.strftime("%a, %Y %b %d"))
 print(dt.strftime("Weekday: %u"))
 print(dt.strftime("day of the year: %j"))
-print(dt.strftime("Week of the year: %U"))
+print(dt.strftime("Week of the year: %U")) 
+'''
+#4.6 
+'''
+
+
+import calendar
+print(calendar.calendar(2020)
+
+
+import calendar
+for i in range(2000, 2020):
+    for m in range(1,12):
+        for d in range(1, 32):
+            try:
+                print(calendar.weekday(i, m, d))
+            except ValueError:
+                pass
+        
+
+
+
+
+
+
+ML=["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"]
+for i in range(ML):
+    import calendar
+    calendar.setfirstweekday(calendar.ML)
+    print(calendar.weekheader(1))
+
+
+
+import calendar
+
+print(calendar.isleap(2020))
+print(calendar.leapdays(2010, 2021))  # Up to but not including 2021.
+'''
+import calendar  
+
+c = calendar.Calendar()
+
+for iter in c.itermonthdays2(2019, 11):
+    print(iter, end=" ")
