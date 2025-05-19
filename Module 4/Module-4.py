@@ -849,10 +849,50 @@ import calendar
 
 print(calendar.isleap(2020))
 print(calendar.leapdays(2010, 2021))  # Up to but not including 2021.
-'''
 import calendar  
 
 c = calendar.Calendar()
 
 for iter in c.itermonthdays2(2019, 11):
     print(iter, end=" ")
+
+import calendar
+from datetime import date
+import calendar
+
+class MyCalendar(calendar.TextCalendar):
+    def __init__(self):
+        super().__init__()  # Properly initialize the base class
+
+    def count_weekdays_in_year(self, year, weekday):
+        count = 0
+        for month in range(1, 13):
+            monthdays = self.monthdays2calendar(year, month)
+            for week in monthdays:
+                for day, day_of_week in week:
+                    if day != 0 and day_of_week == weekday:
+                        count += 1
+        return count
+
+       
+    
+ 
+
+my_cal = MyCalendar()
+print(my_cal.count_weekdays_in_year(2020, 2))
+     
+    
+
+
+
+import calendar
+ 
+c = calendar.Calendar()
+ 
+for weekday in c.iterweekdays():
+    print(weekday, end=" ")
+ '''
+
+
+b=bytearray(3)
+print(b)
