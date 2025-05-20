@@ -891,8 +891,10 @@ c = calendar.Calendar()
  
 for weekday in c.iterweekdays():
     print(weekday, end=" ")
- '''
+ 
 
 
 b=bytearray(3)
 print(b)
+import math
+print(dir(math))'''
